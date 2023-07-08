@@ -3,6 +3,7 @@ package com.innova.expenseTracking.services;
 import java.util.List;
 import java.util.Optional;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.innova.expenseTracking.entities.User;
@@ -11,6 +12,7 @@ import com.innova.expenseTracking.repos.UserRepository;
 @Service
 public class UserService {
 	
+	@Autowired
 	private UserRepository userRepository;
 	
 	public List<User> getAllUsers() {
@@ -32,7 +34,7 @@ public class UserService {
 			foundUser.setFirstname(newUser.getFirstname());
 			foundUser.setLastname(newUser.getLastname());
 			foundUser.setPassword(newUser.getPassword());
-			foundUser.setEmail(newUser.getEmail());
+			foundUser.setUserName(newUser.getUserName());
 			
 			userRepository.save(foundUser);
 			return foundUser;
@@ -42,6 +44,11 @@ public class UserService {
 
 	public void deleteById(Long userId) {
 		userRepository.deleteById(userId);
+		
+	}
+
+	public User getOneUserByUserName(String userName) {
+		return  (User) userRepository.findAll();
 		
 	}
 	

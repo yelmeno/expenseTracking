@@ -1,5 +1,6 @@
 package com.innova.expenseTracking.services;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
@@ -11,7 +12,8 @@ import com.innova.expenseTracking.security.JwtUserDetails;
 
 @Service
 public class UserDetailsServiceImpl implements UserDetailsService {
-
+	
+	@Autowired
 	private UserRepository userRepository;
 	
     public UserDetailsServiceImpl(UserRepository userRepository) {
@@ -19,8 +21,8 @@ public class UserDetailsServiceImpl implements UserDetailsService {
     }
     
 	@Override
-	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-		User user = userRepository.findByUserName(username);
+	public UserDetails loadUserByUsername(String userName) throws UsernameNotFoundException {
+		User user = userRepository.findByUserName(userName);
 		return JwtUserDetails.create(user);
 	}
 	

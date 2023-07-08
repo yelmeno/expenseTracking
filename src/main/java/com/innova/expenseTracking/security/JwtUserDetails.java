@@ -15,16 +15,17 @@ import lombok.Setter;
 
 @Getter
 @Setter
+
 public class JwtUserDetails implements UserDetails {
 
 	public Long id;
-	private String email;
+	private String userName;
 	private String password;
 	private Collection<? extends GrantedAuthority> authorities;
 	
-    private JwtUserDetails(Long id, String email, String password, Collection<? extends GrantedAuthority> authorities) {
+    private JwtUserDetails(Long id, String userName, String password, Collection<? extends GrantedAuthority> authorities) {
         this.id = id;
-        this.email = email;
+        this.userName = userName;
         this.password = password;
         this.authorities = authorities;
     }
@@ -32,7 +33,7 @@ public class JwtUserDetails implements UserDetails {
     public static JwtUserDetails create(User user) {
         List<GrantedAuthority> authoritiesList = new ArrayList<>();
         authoritiesList.add(new SimpleGrantedAuthority("user"));
-        return new JwtUserDetails(user.getId(), user.getEmail(), user.getPassword(), authoritiesList);
+        return new JwtUserDetails(user.getId(), user.getUserName(), user.getPassword(), authoritiesList);
     }
     
 	@Override
@@ -53,6 +54,12 @@ public class JwtUserDetails implements UserDetails {
 	@Override
 	public boolean isEnabled() {
 		return true;
+	}
+
+	@Override
+	public String getUsername() {
+		
+		return null;
 	}
 
 }

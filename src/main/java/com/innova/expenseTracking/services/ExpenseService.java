@@ -2,6 +2,7 @@ package com.innova.expenseTracking.services;
 
 import java.util.List;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.PostMapping;
 
@@ -13,7 +14,8 @@ import io.swagger.v3.oas.annotations.parameters.RequestBody;
 
 @Service
 public class ExpenseService {
-
+	
+		@Autowired
 		private ExpenseRepository expenseRepository;
 		
 	public List<Expense> getAllExpenses() {

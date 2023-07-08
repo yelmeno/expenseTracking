@@ -3,9 +3,8 @@ package com.innova.expenseTracking.requests;
 import lombok.Data;
 
 @Data
-public class UserRequest {
-	
-	String userName;
-	String password;
-	
+public class RefreshRequest {
+
+	Long userId;
+	String refreshToken;
 }
